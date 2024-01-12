@@ -1,0 +1,20 @@
+:root {
+    --background-color: #0f0f0f;
+    --text-color: #fafafa;
+    --text-color-tab: #969696;
+    --text-color-tab-hover: #ffffff;
+    --border-menu-left: 1px solid #181818;
+    --brackground-color-send: #1c1c1e;
+    --font-size: 14px;
+  }
+
+/* Cambiar a modo claro */
+body.white-mode {
+    --background-color: #fafafa;
+    --text-color: #0f0f0f;
+    --text-color-tab: #969696;
+    --text-color-tab-hover: #000000;
+    --border-menu-left: 1px solid #e6e6e6;
+    --brackground-color-send: #e6e6e6;
+    --font-size: 14px;
+  }

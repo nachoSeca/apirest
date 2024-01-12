@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <!-- CSS link -->
+    <link rel="stylesheet" href="./css/settings.css" />
+    <link rel="stylesheet" href="./css/buttonDark.css" />
+    <link rel="stylesheet" href="./css/white-mode.css" />
+  </head>
+  <body class="vh-100">
+    <div class="container-fluid">
+      <!-- BARRA SUPERIOR -->
+      <div class="row p-2 top_bar align-items-center">
+        <div class="col-6 text-start">
+          <h3 id="API_Name"><span class="changeColor">API</span> Manager</h3>
+        </div>
+        <div class="col-6 text-end">
+          <a href="./404.html">
+            <input
+              id="start-Session"
+              type="button"
+              class="changeColorButton"
+              value="Iniciar sesión"
+            />
+          </a>
+        </div>
+      </div>
+      <!-- FIN BARRA SUPERIOR -->
+
+      <!-- CONTENIDO -->
+      <div class="row vh-100">
+        <!-- MENÚ LATERAL IZQUIERDO -->
+        <nav class="col-12 col-md-2 col-lg-2 text-center left_menu">
+          <ul class="nav flex-column">
+            <li class="nav-item d-flex">
+              <a
+                class="nav-link active changeColor"
+                aria-current="page"
+                href="./index.html"
+                >REST</a
+              >
+            </li>
+            <li class="nav-item d-flex">
+              <a class="nav-link changeColor" href="#">Ajustes</a>
+            </li>
+          </ul>
+        </nav>
+        <!-- FIN MENÚ LATERAL IZQUIERDO -->
+
+        <!-- CONTENIDO CENTRAL -->
+        <section class="col-12 col-md-7 col-lg-7 text-center">
+          <h1 class="changeColor">Ajustes</h1>
+          <div class="row mt-4">
+            <div class="col-3 text-start">
+              <h2>Tema</h2>
+              <p>
+                Personaliza los <span class="changeColor">colores</span> de la
+                web.
+              </p>
+            </div>
+            <div class="col-9 d-flex colorCircleBox">
+              <img
+                src="./img/circle-green.svg"
+                alt=""
+                class="colorCircle"
+                id="green"
+              />
+              <img
+                src="./img/circle-teal.svg"
+                alt=""
+                class="colorCircle"
+                id="teal"
+              />
+              <img
+                src="./img/circle-blue.svg"
+                alt=""
+                class="colorCircle"
+                id="blue"
+              />
+              <img
+                src="./img/circle-indigo.svg"
+                alt=""
+                class="colorCircle"
+                id="indigo"
+              />
+              <img
+                src="./img/circle-purple.svg"
+                alt=""
+                class="colorCircle"
+                id="purple"
+              />
+              <img
+                src="./img/circle-yellow.svg"
+                alt=""
+                class="colorCircle"
+                id="yellow"
+              />
+              <img
+                src="./img/circle-orange.svg"
+                alt=""
+                class="colorCircle"
+                id="orange"
+              />
+              <img
+                src="./img/circle-red.svg"
+                alt=""
+                class="colorCircle"
+                id="red"
+              />
+              <img
+                src="./img/circle-pink.svg"
+                alt=""
+                class="colorCircle"
+                id="pink"
+              />
+            </div>
+          </div>
+
+          <!-- BOTÓN DARK MODE -->
+          <div class="row mt-4">
+            <div class="col-3 text-start">
+              <h2>Fondo</h2>
+              <p id="textDark">
+                Sencillo, ¿eres team oscuro? Eres de los buenos.
+              </p>
+              <p id="textLight" style="display: none">
+                ¿Notas cómo poco a poco se derrite tu pupila?
+              </p>
+            </div>
+            <div class="col-9">
+              <label class="switch">
+                <input type="checkbox" id="darkMode" />
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- FIN CONTENIDO CENTRAL -->
+        </section>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <footer class="text-center mt-5 changeColorButton">
+            API Manager &copy; 2024
+          </footer>
+        </div>
+      </div>
+
+      <!-- FIN CONTENIDO -->
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./js/settings.js"></script>
+    <!--     <script src="./js/localStorage.js"></script>
+ -->
+  </body>
+</html>

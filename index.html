@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <!-- CSS link -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/settings.css" />
+    <link rel="stylesheet" href="./css/loader.css" />
+    <link rel="stylesheet" href="./css/white-mode.css" />
+
+    <title>Peticiones API REST</title>
+  </head>
+  <body class="vh-100">
+    <div class="container-fluid">
+      <!-- BARRA SUPERIOR -->
+      <div class="row p-2 top_bar align-items-center">
+        <div class="col-6 text-start">
+          <h3 id="API_Name"><span class="changeColor">API</span> Manager</h3>
+        </div>
+        <div class="col-6 text-end">
+          <a href="./404.html">
+            <input
+              id="start-Session"
+              type="button"
+              class="changeColorButton"
+              value="Iniciar sesión"
+            />
+          </a>
+        </div>
+      </div>
+      <!-- FIN BARRA SUPERIOR -->
+
+      <!-- CONTENIDO -->
+      <div class="row ">
+        <!-- MENÚ LATERAL IZQUIERDO -->
+        <nav class="col-12 col-md-2 col-lg-2 text-center left_menu">
+          <ul class="nav flex-column">
+            <li class="nav-item d-flex">
+              <a
+                class="nav-link active changeColor"
+                aria-current="page"
+                href="#"
+                >REST</a
+              >
+            </li>
+            <li class="nav-item d-flex">
+              <a class="nav-link changeColor" href="./settings.html">Ajustes</a>
+            </li>
+          </ul>
+        </nav>
+        <!-- FIN MENÚ LATERAL IZQUIERDO -->
+
+        <!-- HISTORIAL DE BÚSQUEDAS -->
+        <section class="col-12 col-md-2 col-lg-2 search_history text-center">
+          <p class="changeColor" id="history">Historial de búsqueda</p>
+          <p class="history"></p>
+        </section>
+        <!-- FIN HISTORIAL DE BÚSQUEDAS -->
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <section class="col-12 col-md-7 col-lg-7 text-center">
+          <div class="row">
+            <div class="col-12">
+              <h3>Llamadas a la API</h3>
+            </div>
+            <div class="row justify-content-between">
+              <div class="col-md-12 text-start">
+                <div class="d-flex">
+                  <select name="data" id="data" class="me-2">
+                    <option id="methodGET" value="get">
+                      <span id="get">GET</span>
+                    </option>
+                    <option id="methodPOST" value="post">
+                      <span id="post">POST</span>
+                    </option>
+                    <option value="delete">
+                      <span id="delete">DELETE</span>
+                    </option>
+                    <option value="head"><span id="head">HEAD</span></option>
+                  </select>
+                  <div class="textInputWrapper">
+                    <input
+                      type="text"
+                      name="api"
+                      id="url_api"
+                      class="textInput"
+                      placeholder="API URL"
+                      value="http://pokeapi.co/api/v2/pokemon/1"
+                    />
+                  </div>
+
+                  <input
+                    type="button"
+                    class="changeColorButton"
+                    value="Enviar"
+                    id="send"
+                  />
+                  <input
+                    type="button"
+                    title=""
+                    class="changeColorButton"
+                    value="Copiar Json"
+                    id="copyJson"
+                  />
+                  <input
+                    type="button"
+                    title=""
+                    class="changeColorButton"
+                    value="Copiar Crudo"
+                    id="copyCrudo"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 d-flex status m-3" id="status">
+                <div class="col-md-4">
+                  <p id="status_code">Estado:</p>
+                </div>
+                <div class="col-md-4">
+                  <p id="status_time">Time:</p>
+                </div>
+                <div class="col-md-4">
+                  <p id="status_size">Size:</p>
+                </div>
+              </div>
+            </div>
+            <section class="col-12">
+              <!-- TABS LINK -->
+              <div class="tab">
+                <button
+                  class="tablinks"
+                  onclick="openJSON(event, 'json')"
+                  id="defaultOpen"
+                >
+                  JSON
+                </button>
+                <button class="tablinks" onclick="openJSON(event, 'crudo')">
+                  Crudo
+                </button>
+              </div>
+              <!-- TAB CONTENT -->
+              <div class="tabcontent" id="json">
+                <form>
+                  <div class="loader" id="loader" style="display: none"></div>
+                  <textarea name="jsonCode" id="jsonCode" disabled> </textarea>
+                </form>
+              </div>
+              <div class="tabcontent" id="crudo">
+                <form>
+                  <textarea name="crudoCode" id="crudoCode" disabled></textarea>
+                </form>
+              </div>
+            </section>
+          </div>
+        </section>
+        <!-- FIN CONTENIDO PRINCIPAL -->
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <footer class="text-center mt-5 changeColorButton">
+            API Manager &copy; 2024
+          </footer>
+        </div>
+      </div>
+      <!-- FIN CONTENIDO -->
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./js/tabs.js"></script>
+    <script src="./js/api.js"></script>
+    <script src="./js/index.js"></script>
+    <script src="./js/textCopied.js"></script>
+  </body>
+</html>
