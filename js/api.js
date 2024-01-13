@@ -10,7 +10,9 @@ const COLORS = {
   OK: "#35c65f",
   ERROR: "red",
 };
+const DELETEHISTORTY = document.querySelector(".deleteHistory");
 
+/* Recuperar el historial guardado y aplicarlo a los elementos */
 const HISTORY_STORAGE = localStorage.getItem("history");
 if (HISTORY_STORAGE) {
   HISTORY.innerHTML += HISTORY_STORAGE;
@@ -110,15 +112,46 @@ const addStatusSize = (status, statusSize) => {
 
 const addHistory = (status) => {
   let history = document.createElement("p");
+  let image = document.createElement("img");
   history.style.textOverflow = "ellipsis";
   history.style.overflow = "hidden";
   history.style.fontWeight = "bold";
   history.style.textDecoration = "underline";
   history.innerHTML = API_URL.value;
   history.style.color = status === 200 ? COLORS.OK : COLORS.ERROR;
+  image.src = "./img/deleteIcon.svg";
+  image.className = "deleteIcon";
+  image.style.display = "inline-block";
+  image.style.verticalAlign = "middle";
+  history.appendChild(image);
   document.querySelector(".history").appendChild(history);
   localStorage.setItem("history", HISTORY.innerHTML);
+
+  // Agrega el evento de escucha al icono de la papelera
+  image.addEventListener("click", () => {
+    console.log("Borrando...");
+    history.remove();
+    localStorage.setItem("history", HISTORY.innerHTML);
+  });
 };
+
+/* Eliminar el historial */
+DELETEHISTORTY.addEventListener("click", () => {
+  localStorage.removeItem("history");
+  HISTORY.innerHTML = "";
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const deleteIcons = document.querySelectorAll(".deleteIcon");
+
+  deleteIcons.forEach(icon => {
+    icon.addEventListener("click", () => {
+      icon.parentNode.remove();
+      localStorage.setItem("history", JSON.stringify(getHistoryFromDOM()));
+    });
+  });
+});
+
 
 /* addListener para cuando se haga click o se de al Enter, ejecute la función */
 

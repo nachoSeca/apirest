@@ -81,6 +81,10 @@ body {
   text-decoration: underline;
 }
 
+.deleteIcon{
+  width: 20px;;
+}
+
 /* MAIN */
 #data {
   height: 30px;
