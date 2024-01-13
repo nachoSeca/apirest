@@ -10,6 +10,13 @@ const COLORS = {
   OK: "#35c65f",
   ERROR: "red",
 };
+const DELETEHISTORTY = document.querySelector(".deleteHistory");
+
+/* Recuperar el historial guardado y aplicarlo a los elementos */
+const HISTORY_STORAGE = localStorage.getItem("history");
+if (HISTORY_STORAGE) {
+  HISTORY.innerHTML += HISTORY_STORAGE;
+}
 
 /* Use de API_URL */
 const makeAPICall = () => {
@@ -28,6 +35,7 @@ const makeAPICall = () => {
   fetch(API_URL.value, QUERY_PARAMS)
     .then((response) => {
       status = response.status;
+      console.log(`El método de la solicitud es: ${QUERY_PARAMS.method}`);
       return response.json();
     })
     .then((data) => {
@@ -46,8 +54,12 @@ const makeAPICall = () => {
     })
     .catch(() => {
       LOADER.style.display = "none";
-      CRUDORESULT.innerHTML = "Not found";
-      JSONRESULT.innerHTML = "Not found";
+      if (QUERY_PARAMS.method === "post") {
+        ADDERROR(QUERY_PARAMS.method, JSONRESULT, CRUDORESULT);
+      }
+      if (QUERY_PARAMS.method === "delete") {
+        ADDERROR(QUERY_PARAMS.method, JSONRESULT, CRUDORESULT);
+      }
       /* Añadimos el historial de peticiones */
       addHistory(status);
       /* Añadimos el estado de la petición */
@@ -57,6 +69,11 @@ const makeAPICall = () => {
       /* Añadimos el tamaño de la petición */
       addStatusSize(status, statusSize);
     });
+};
+
+const ADDERROR = (query, json, crudo) => {
+  json.innerHTML = "Lo sentimos, no se ha podido realizar la petición por método " + query + "." ;
+  crudo.innerHTML = "Lo sentimos, no se ha podido realizar la petición por método " + query + ".";
 };
 
 /* Función para crear un elemento. Si ya existe, se elimina */
@@ -92,16 +109,49 @@ const addStatusSize = (status, statusSize) => {
   addElement("#status_size", status, text);
 };
 
+
 const addHistory = (status) => {
   let history = document.createElement("p");
+  let image = document.createElement("img");
   history.style.textOverflow = "ellipsis";
   history.style.overflow = "hidden";
   history.style.fontWeight = "bold";
   history.style.textDecoration = "underline";
   history.innerHTML = API_URL.value;
   history.style.color = status === 200 ? COLORS.OK : COLORS.ERROR;
+  image.src = "./img/deleteIcon.svg";
+  image.className = "deleteIcon";
+  image.style.display = "inline-block";
+  image.style.verticalAlign = "middle";
+  history.appendChild(image);
   document.querySelector(".history").appendChild(history);
+  localStorage.setItem("history", HISTORY.innerHTML);
+
+  // Agrega el evento de escucha al icono de la papelera
+  image.addEventListener("click", () => {
+    console.log("Borrando...");
+    history.remove();
+    localStorage.setItem("history", HISTORY.innerHTML);
+  });
 };
+
+/* Eliminar el historial */
+DELETEHISTORTY.addEventListener("click", () => {
+  localStorage.removeItem("history");
+  HISTORY.innerHTML = "";
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const deleteIcons = document.querySelectorAll(".deleteIcon");
+
+  deleteIcons.forEach(icon => {
+    icon.addEventListener("click", () => {
+      icon.parentNode.remove();
+      localStorage.setItem("history", JSON.stringify(getHistoryFromDOM()));
+    });
+  });
+});
+
 
 /* addListener para cuando se haga click o se de al Enter, ejecute la función */
 
