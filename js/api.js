@@ -28,6 +28,7 @@ const makeAPICall = () => {
   fetch(API_URL.value, QUERY_PARAMS)
     .then((response) => {
       status = response.status;
+      console.log(`El método de la solicitud es: ${QUERY_PARAMS.method}`);
       return response.json();
     })
     .then((data) => {
@@ -46,8 +47,12 @@ const makeAPICall = () => {
     })
     .catch(() => {
       LOADER.style.display = "none";
-      CRUDORESULT.innerHTML = "Not found";
-      JSONRESULT.innerHTML = "Not found";
+      if (QUERY_PARAMS.method === "post") {
+        ADDERROR(QUERY_PARAMS.method, JSONRESULT, CRUDORESULT);
+      }
+      if (QUERY_PARAMS.method === "delete") {
+        ADDERROR(QUERY_PARAMS.method, JSONRESULT, CRUDORESULT);
+      }
       /* Añadimos el historial de peticiones */
       addHistory(status);
       /* Añadimos el estado de la petición */
@@ -57,6 +62,11 @@ const makeAPICall = () => {
       /* Añadimos el tamaño de la petición */
       addStatusSize(status, statusSize);
     });
+};
+
+const ADDERROR = (query, json, crudo) => {
+  json.innerHTML = "Lo sentimos, no se ha podido realizar la petición por método " + query + "." ;
+  crudo.innerHTML = "Lo sentimos, no se ha podido realizar la petición por método " + query + ".";
 };
 
 /* Función para crear un elemento. Si ya existe, se elimina */
