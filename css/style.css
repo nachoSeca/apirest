@@ -25,10 +25,10 @@ body {
   border-bottom: var(--border-menu-left);
 }
 
-/* TITLE */
+/* ANIMATED CONTENT */
 
-.left_menu {
-  animation-duration: 3s;
+.animated {
+  animation-duration: 2s;
   animation-name: slidein;
 }
 
