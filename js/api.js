@@ -11,6 +11,11 @@ const COLORS = {
   ERROR: "red",
 };
 
+const HISTORY_STORAGE = localStorage.getItem("history");
+if (HISTORY_STORAGE) {
+  HISTORY.innerHTML += HISTORY_STORAGE;
+}
+
 /* Use de API_URL */
 const makeAPICall = () => {
   const startTime = performance.now();
@@ -102,6 +107,7 @@ const addStatusSize = (status, statusSize) => {
   addElement("#status_size", status, text);
 };
 
+
 const addHistory = (status) => {
   let history = document.createElement("p");
   history.style.textOverflow = "ellipsis";
@@ -111,6 +117,7 @@ const addHistory = (status) => {
   history.innerHTML = API_URL.value;
   history.style.color = status === 200 ? COLORS.OK : COLORS.ERROR;
   document.querySelector(".history").appendChild(history);
+  localStorage.setItem("history", HISTORY.innerHTML);
 };
 
 /* addListener para cuando se haga click o se de al Enter, ejecute la función */
