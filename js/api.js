@@ -72,8 +72,14 @@ const makeAPICall = () => {
 };
 
 const ADDERROR = (query, json, crudo) => {
-  json.innerHTML = "Lo sentimos, no se ha podido realizar la petición por método " + query + "." ;
-  crudo.innerHTML = "Lo sentimos, no se ha podido realizar la petición por método " + query + ".";
+  json.innerHTML =
+    "Lo sentimos, no se ha podido realizar la petición por método " +
+    query +
+    ".";
+  crudo.innerHTML =
+    "Lo sentimos, no se ha podido realizar la petición por método " +
+    query +
+    ".";
 };
 
 /* Función para crear un elemento. Si ya existe, se elimina */
@@ -109,7 +115,6 @@ const addStatusSize = (status, statusSize) => {
   addElement("#status_size", status, text);
 };
 
-
 const addHistory = (status) => {
   let history = document.createElement("p");
   let image = document.createElement("img");
@@ -117,6 +122,8 @@ const addHistory = (status) => {
   history.style.overflow = "hidden";
   history.style.fontWeight = "bold";
   history.style.textDecoration = "underline";
+  history.style.cursor = "pointer";
+  history.className = "historyText";
   history.innerHTML = API_URL.value;
   history.style.color = status === 200 ? COLORS.OK : COLORS.ERROR;
   image.src = "./img/deleteIcon.svg";
@@ -129,9 +136,19 @@ const addHistory = (status) => {
 
   // Agrega el evento de escucha al icono de la papelera
   image.addEventListener("click", () => {
-    console.log("Borrando...");
     history.remove();
     localStorage.setItem("history", HISTORY.innerHTML);
+  });
+
+  history.addEventListener("click", () => {
+    navigator.clipboard
+      .writeText(history.textContent)
+      .then(() => {
+        console.log("Texto copiado al portapapeles");
+      })
+      .catch((err) => {
+        console.error("Error al copiar el texto: ", err);
+      });
   });
 };
 
@@ -144,7 +161,7 @@ DELETEHISTORTY.addEventListener("click", () => {
 document.addEventListener("DOMContentLoaded", () => {
   const deleteIcons = document.querySelectorAll(".deleteIcon");
 
-  deleteIcons.forEach(icon => {
+  deleteIcons.forEach((icon) => {
     icon.addEventListener("click", () => {
       icon.parentNode.remove();
       localStorage.setItem("history", JSON.stringify(getHistoryFromDOM()));
@@ -152,6 +169,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+function getHistoryFromDOM() {
+  const historyElements = document.querySelectorAll(".history p");
+  const history = Array.from(historyElements).map((p) => p.textContent);
+  return history;
+}
 
 /* addListener para cuando se haga click o se de al Enter, ejecute la función */
 
