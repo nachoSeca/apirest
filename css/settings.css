@@ -25,6 +25,23 @@ body {
   border-bottom: var(--border-menu-left);
 }
 
+/* ANIMATED CONTENT */
+
+.animated {
+  animation-duration: 2s;
+  animation-name: slidein;
+}
+
+@keyframes slidein {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 100;
+  }
+}
+
 /* LEFT MENU */
 .left_menu {
   margin-left: 10px;
