@@ -44,4 +44,6 @@ Queremos simular una aplicación para la realización de peticiones HTTP, simila
 - Es muy probable que el código no sea el más optimizado, contenga errores... También es otra forma de aprender. 
 - Espero que poco a poco vaya quedando como tengo en mente.
 
+## Authors
+
 - [@nachoSeca](https://github.com/nachoSeca)
