@@ -35,7 +35,6 @@ const makeAPICall = () => {
   fetch(API_URL.value, QUERY_PARAMS)
     .then((response) => {
       status = response.status;
-      console.log(`El método de la solicitud es: ${QUERY_PARAMS.method}`);
       return response.json();
     })
     .then((data) => {
@@ -124,7 +123,7 @@ const addHistory = (status) => {
   history.style.textDecoration = "underline";
   history.style.cursor = "pointer";
   history.className = "historyText";
-  history.innerHTML = API_URL.value;
+  history.textContent = API_URL.value;
   history.style.color = status === 200 ? COLORS.OK : COLORS.ERROR;
   image.src = "./img/deleteIcon.svg";
   image.className = "deleteIcon";
@@ -142,7 +141,15 @@ const addHistory = (status) => {
 
   /* Copiar historial en la barra de búsqueda */
   history.addEventListener("click", () => {
-        API_URL.value = history.textContent;
+    navigator.clipboard
+      .writeText(history.textContent)
+      .then(function () {
+        console.log("Texto copiado al portapapeles");
+      })
+      .catch(function () {
+        console.log("No se pudo copiar el texto");
+      });
+    localStorage.setItem("history", HISTORY.innerHTML);
   });
 };
 
