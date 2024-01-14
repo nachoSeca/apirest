@@ -35,7 +35,6 @@ const makeAPICall = () => {
   fetch(API_URL.value, QUERY_PARAMS)
     .then((response) => {
       status = response.status;
-      console.log(`El método de la solicitud es: ${QUERY_PARAMS.method}`);
       return response.json();
     })
     .then((data) => {
@@ -72,8 +71,14 @@ const makeAPICall = () => {
 };
 
 const ADDERROR = (query, json, crudo) => {
-  json.innerHTML = "Lo sentimos, no se ha podido realizar la petición por método " + query + "." ;
-  crudo.innerHTML = "Lo sentimos, no se ha podido realizar la petición por método " + query + ".";
+  json.innerHTML =
+    "Lo sentimos, no se ha podido realizar la petición por método " +
+    query +
+    ".";
+  crudo.innerHTML =
+    "Lo sentimos, no se ha podido realizar la petición por método " +
+    query +
+    ".";
 };
 
 /* Función para crear un elemento. Si ya existe, se elimina */
@@ -109,7 +114,6 @@ const addStatusSize = (status, statusSize) => {
   addElement("#status_size", status, text);
 };
 
-
 const addHistory = (status) => {
   let history = document.createElement("p");
   let image = document.createElement("img");
@@ -117,7 +121,9 @@ const addHistory = (status) => {
   history.style.overflow = "hidden";
   history.style.fontWeight = "bold";
   history.style.textDecoration = "underline";
-  history.innerHTML = API_URL.value;
+  history.style.cursor = "pointer";
+  history.className = "historyText";
+  history.textContent = API_URL.value;
   history.style.color = status === 200 ? COLORS.OK : COLORS.ERROR;
   image.src = "./img/deleteIcon.svg";
   image.className = "deleteIcon";
@@ -127,10 +133,22 @@ const addHistory = (status) => {
   document.querySelector(".history").appendChild(history);
   localStorage.setItem("history", HISTORY.innerHTML);
 
-  // Agrega el evento de escucha al icono de la papelera
+  /* Eliminar historial al pinchar en el icono de papelera */
   image.addEventListener("click", () => {
-    console.log("Borrando...");
     history.remove();
+    localStorage.setItem("history", HISTORY.innerHTML);
+  });
+
+  /* Copiar historial en la barra de búsqueda */
+  history.addEventListener("click", () => {
+    navigator.clipboard
+      .writeText(history.textContent)
+      .then(function () {
+        console.log("Texto copiado al portapapeles");
+      })
+      .catch(function () {
+        console.log("No se pudo copiar el texto");
+      });
     localStorage.setItem("history", HISTORY.innerHTML);
   });
 };
@@ -144,7 +162,7 @@ DELETEHISTORTY.addEventListener("click", () => {
 document.addEventListener("DOMContentLoaded", () => {
   const deleteIcons = document.querySelectorAll(".deleteIcon");
 
-  deleteIcons.forEach(icon => {
+  deleteIcons.forEach((icon) => {
     icon.addEventListener("click", () => {
       icon.parentNode.remove();
       localStorage.setItem("history", JSON.stringify(getHistoryFromDOM()));
@@ -152,6 +170,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+function getHistoryFromDOM() {
+  const historyElements = document.querySelectorAll(".history p");
+  const history = Array.from(historyElements).map((p) => p.textContent);
+  return history;
+}
 
 /* addListener para cuando se haga click o se de al Enter, ejecute la función */
 
