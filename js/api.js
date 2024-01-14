@@ -134,21 +134,15 @@ const addHistory = (status) => {
   document.querySelector(".history").appendChild(history);
   localStorage.setItem("history", HISTORY.innerHTML);
 
-  // Agrega el evento de escucha al icono de la papelera
+  /* Eliminar historial al pinchar en el icono de papelera */
   image.addEventListener("click", () => {
     history.remove();
     localStorage.setItem("history", HISTORY.innerHTML);
   });
 
+  /* Copiar historial en la barra de búsqueda */
   history.addEventListener("click", () => {
-    navigator.clipboard
-      .writeText(history.textContent)
-      .then(() => {
-        console.log("Texto copiado al portapapeles");
-      })
-      .catch((err) => {
-        console.error("Error al copiar el texto: ", err);
-      });
+        API_URL.value = history.textContent;
   });
 };
 
