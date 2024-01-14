@@ -43,3 +43,7 @@ Queremos simular una aplicación para la realización de peticiones HTTP, simila
 - Este proyecto está en contínua evolución, ya que mientras seguimos adelantando temario en el curso, se van implementando nuevas características o se mejoran algunas ya existentes.
 - Es muy probable que el código no sea el más optimizado, contenga errores... También es otra forma de aprender. 
 - Espero que poco a poco vaya quedando como tengo en mente.
+
+## Authors
+
+- [@nachoSeca](https://github.com/nachoSeca)
