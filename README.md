@@ -46,4 +46,5 @@ Queremos simular una aplicación para la realización de peticiones HTTP, simila
 
 ## Authors
 
-- [@nachoSeca](https://github.com/nachoSeca)
+[//]: contributor-faces
+<a href="https://github.com/nachoSeca"><img src="https://avatars.githubusercontent.com/u/115080972?v=4" title="pcottle" width="80" height="80"></a>
