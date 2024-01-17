@@ -35,7 +35,6 @@ const makeAPICall = () => {
   fetch(API_URL.value, QUERY_PARAMS)
     .then((response) => {
       status = response.status;
-      console.log(QUERY_PARAMS.method);
       return response.json();
     })
     .then((data) => {
