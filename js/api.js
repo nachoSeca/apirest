@@ -35,6 +35,7 @@ const makeAPICall = () => {
   fetch(API_URL.value, QUERY_PARAMS)
     .then((response) => {
       status = response.status;
+      console.log(QUERY_PARAMS.method);
       return response.json();
     })
     .then((data) => {
@@ -51,12 +52,17 @@ const makeAPICall = () => {
       /* Añadimos el tamaño de la petición en megabytes */
       addStatusSize(status, statusSize);
     })
-    .catch(() => {
+    .catch((error) => {
+      console.log(error)
       LOADER.style.display = "none";
+
       if (QUERY_PARAMS.method === "post") {
         ADDERROR(QUERY_PARAMS.method, JSONRESULT, CRUDORESULT);
       }
-      if (QUERY_PARAMS.method === "delete") {
+      if (QUERY_PARAMS.method === "methodPUT") {
+        ADDERROR(QUERY_PARAMS.method, JSONRESULT, CRUDORESULT);
+      }
+      if (QUERY_PARAMS.method === "methodDELETE") {
         ADDERROR(QUERY_PARAMS.method, JSONRESULT, CRUDORESULT);
       }
       /* Añadimos el historial de peticiones */
